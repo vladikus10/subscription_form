@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Subscribe{% endblock %}
+
+{% block body %}
+	<form id="subscriptionForm" class="card">
+		<center><h3>New Subscription</h3></center>
+		<label for="name">Name:</label>
+		<input type="text" name="name" /><br/>
+		<label for="name">Email:</label>
+		<input type="email" name="email" /><br/>
+		<label>Categories:</label><br />
+		{% for key,category in categories %}
+			<input type="checkbox" name="category[]" value={{key}}></input>
+			<label for="category">{{category}}</label></br>
+		{% endfor %}
+		<input type="submit" value="Submit" />
+		<div id=errors></div>
+		<div id=messages></div>
+	</form>
+{% endblock %}

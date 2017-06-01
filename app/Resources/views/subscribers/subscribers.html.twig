@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Subscribers{% endblock %}
+
+{% block body %}
+	<table>
+	<tr>
+		<th>Name</th>
+		<th>Email</th>
+		<th>Categories</th>
+		<th>Registration date</th>
+		<th>Edit</th>
+		<th>Delete</th>
+	</tr>
+	{% for subscriber in subscribers%}
+	<tr id="{{subscriber.id}}">
+		<td>{{subscriber.name}}</td>
+		<td>{{subscriber.email}}</td>
+		<td>
+			{% for key in subscriber.categories %}
+				{{ categories[key] }}, 
+			{% endfor %}
+		</td>
+		<td>{{subscriber.registration_date}}</td>
+		<td><button onclick="openSub({{subscriber|json_encode()}})">Edit</button></td>
+		<td><button onclick="deleteSub({{subscriber.id|json_encode()}})">Delete</button></td>
+	</tr>
+	{% endfor %}
+	</table>
+	<div id="modal">
+	<form id="editForm" class="card">
+		<img id="close" src="{{ asset('img/x.svg') }}" />
+		<center><h3>Edit</h3></center>
+		<label for="name">Name:</label>
+		<input type="text" name="name" id="edit_name" /></br>
+		<label for="name">Email:</label>
+		<input type="email" name="email" id="edit_email" />
+		<input type="submit" value="Update" />
+		<div id=errors></div>
+	</form>
+	</div>
+{% endblock %}
